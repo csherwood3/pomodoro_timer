@@ -1,28 +1,28 @@
 from datetime import datetime
+from datetime import timedelta
 import time
 
 
 def start_timer(minutes):
     """
-    This method starts a timer. Counts down from a minutes input.
+    This method starts a timer. Counts down from a minutes input. Displays time in MM:SS format.
 
     :param: minutes
     :return: start_time, end_time
     """
 
-    # initialize the timer amount in seconds * minutes
-    seconds = 60 * int(minutes)
+    print("Time Remaining:", end="\n")
+    start_time = datetime.utcnow()
+    end_time = start_time + timedelta(minutes=minutes)
 
-    start_time = datetime.utcnow().isoformat("T", "auto")
-
-    while seconds > 0:
-        time.sleep(1)
-        seconds -= 1
+    while datetime.utcnow() < end_time:
+        print(str(end_time - datetime.utcnow())[2:7], end="\r")
+        time.sleep(0.0)
 
     end_time = datetime.utcnow().isoformat("T", "auto")
 
-    return start_time[11:23], end_time[11:23]
+    return start_time.isoformat("T", "auto")[11:19], end_time[11:19]
 
 
 if __name__ == "__main__":
-    print(start_timer(1))
+    print(start_timer(25))
