@@ -1,6 +1,5 @@
 from datetime import datetime
 from datetime import timedelta
-import time
 
 
 def start_timer(minutes):
@@ -11,13 +10,12 @@ def start_timer(minutes):
     :return: start_time, end_time
     """
 
-    print("Time Remaining:", end="\n")
+    print("\nTime Remaining:")
     start_time = datetime.utcnow()
     end_time = start_time + timedelta(minutes=minutes)
 
     while datetime.utcnow() < end_time:
         print(str(end_time - datetime.utcnow())[2:7], end="\r")
-        time.sleep(0.0)
 
     end_time = datetime.utcnow().isoformat("T", "auto")
 
